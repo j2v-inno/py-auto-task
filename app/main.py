@@ -1,4 +1,5 @@
 import logging
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Query
@@ -17,7 +18,12 @@ async def lifespan(app: FastAPI):
     sqs_poller.stop_poller()
 
 
-app = FastAPI(title="SQS Job Viewer", version="1.0.0", lifespan=lifespan)
+app = FastAPI(
+    title="SQS Job Viewer",
+    version="1.0.0",
+    root_path=os.getenv("ROOT_PATH", ""),
+    lifespan=lifespan,
+)
 
 
 @app.get("/health")
