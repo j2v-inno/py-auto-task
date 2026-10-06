@@ -1,0 +1,13 @@
+services:
+  sqs-job-viewer:
+    build: .
+    container_name: sqs-job-viewer
+    ports:
+      - "3002:3002"
+    env_file: .env
+    volumes:
+      - sqs_job_viewer_data:/data
+    restart: unless-stopped
+
+volumes:
+  sqs_job_viewer_data:
