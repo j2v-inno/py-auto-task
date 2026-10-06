@@ -5,6 +5,8 @@ services:
     ports:
       - "3002:3002"
     env_file: .env
+    environment:
+      - ROOT_PATH=/be/k-auto
     volumes:
       - sqs_job_viewer_data:/data
     restart: unless-stopped
